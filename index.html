@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be My Valentine?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>To the Most Beautiful Soul, Joline,</h1>
+    <p>Every second with you feels like the universe is holding its breath. ✨</p>
+    <p>Your smile? It’s trouble—the kind I’d gladly lose myself in. And your laughter? The only melody I never want to stop playing. 🎶</p>
+    <p>So tell me, gorgeous… should we turn this moment into a masterpiece?</p>
+    <div class="buttons">
+      <button id="yesButton">Yes! 💖</button>
+      <button id="noButton">Umm... 😅</button>
+    </div>
+    <div id="responseMessage" class="response">
+      <!-- Response will appear here -->
+    </div>
+  </div>
+
+  <!-- Music Player -->
+  <audio id="backgroundMusic" loop muted autoplay>
+    <source src="I like you the most.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Play Button with Specific Message -->
+  <div class="play-me">
+    <p>Click the button to play! 🎶</p>
+  </div>
+
+  <!-- Song Title -->
+  <div class="song-title">I Like You the Most</div>
+
+  <!-- Music Controls -->
+  <div class="music-controls">
+    <button id="playPauseButton">🎵</button>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.5">
+  </div>
+
+  <script>
+    const audio = document.getElementById('backgroundMusic');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const volumeControl = document.getElementById('volumeControl');
+
+    // Set initial volume to 50%
+    audio.volume = 0.5;
+    volumeControl.value = 0.5;
+
+    // Unmute and start playing when the user clicks anywhere on the page
+    document.body.addEventListener('click', () => {
+      if (audio.muted) {
+        audio.muted = false; // Unmute the audio
+        playPauseButton.textContent = "⏸️"; // Update the play/pause button
+      }
+    });
+
+    // Play/Pause Button
+    playPauseButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseButton.textContent = "⏸️";
+      } else {
+        audio.pause();
+        playPauseButton.textContent = "🎵";
+      }
+    });
+
+    // Volume Control
+    volumeControl.addEventListener('input', () => {
+      audio.volume = volumeControl.value;
+    });
+
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const responseMessage = document.getElementById('responseMessage');
+
+    yesButton.addEventListener('click', () => {
+      responseMessage.innerHTML = `
+        <p>✨ You said YES… and just like that, my heart forgot how to beat. ✨</p>
+        <p>Guess I’m yours now, Joline—no take-backs. 😉</p>
+        <p>Let’s make this Valentine’s Day the kind of story that poets struggle to put into words. The kind where time slows down, and the only thing that matters is <em>us</em>. 🌹</p>
+        <p>Now tell me, love… should I steal you away for a night under the stars or a dance in the moonlight? 💃🕺</p>
+      `;
+      confettiEffect();
+    });
+
+    noButton.addEventListener('click', () => {
+      responseMessage.innerHTML = `
+        <p>🌸 A maybe? That’s just a ‘yes’ waiting for the perfect moment. 🌸</p>
+        <p>That’s okay, Joline. I’ll be patient—after all, the best things in life are worth waiting for.</p>
+        <p>In the meantime, I’ll keep writing love letters in my head, hoping one day, you’ll read them with your heart. 💌</p>
+        <p>And who knows? Maybe the next time I ask, you won’t have to think twice. 😉✨</p>
+      `;
+    });
+
+    function confettiEffect() {
+      const confettiSettings = { target: 'confetti' };
+      const confetti = new ConfettiGenerator(confettiSettings);
+      confetti.render();
+      setTimeout(() => confetti.clear(), 5000); // Stop confetti after 5 seconds
+    }
+  </script>
+  <canvas id="confetti"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</body>
+</html>
